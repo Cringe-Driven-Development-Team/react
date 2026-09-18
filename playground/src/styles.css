@@ -1,0 +1,326 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-width: 320px;
+	min-height: 100vh;
+	background: #f5f7fb;
+	color: #1f2937;
+	font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+input {
+	font: inherit;
+}
+
+.app {
+	display: grid;
+	min-height: 100vh;
+	place-items: center;
+	padding: 32px 16px;
+}
+
+.panel {
+	width: min(100%, 680px);
+	border: 1px solid #d8dee9;
+	border-radius: 8px;
+	background: #ffffff;
+	box-shadow: 0 18px 45px rgba(31, 41, 55, 0.08);
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding: 24px;
+	border-bottom: 1px solid #edf0f5;
+}
+
+h1 {
+	margin: 0;
+	font-size: 24px;
+	line-height: 1.2;
+}
+
+.subtitle {
+	margin: 6px 0 0;
+	color: #667085;
+}
+
+.effect-status {
+	margin: 6px 0 0;
+	color: #0f766e;
+	font-size: 14px;
+}
+
+.primary,
+.secondary,
+.action,
+.filter,
+.remove {
+	border: 1px solid transparent;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.primary {
+	padding: 10px 14px;
+	background: #2563eb;
+	color: #ffffff;
+}
+
+.secondary {
+	padding: 10px 14px;
+	border-color: #cbd5e1;
+	background: #ffffff;
+	color: #344054;
+}
+
+.header-actions {
+	display: flex;
+	flex: 0 0 auto;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 8px;
+}
+
+.stats-panel {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 12px;
+}
+
+.stats-panel span {
+	padding: 5px 8px;
+	border: 1px solid #dbe4f0;
+	border-radius: 6px;
+	background: #f8fafc;
+	color: #475467;
+	font-size: 13px;
+}
+
+.actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	padding: 16px 24px 0;
+}
+
+.action {
+	padding: 8px 12px;
+	border-color: #cbd5e1;
+	background: #ffffff;
+	color: #344054;
+}
+
+.filters {
+	display: flex;
+	gap: 8px;
+	padding: 16px 24px;
+	border-bottom: 1px solid #edf0f5;
+}
+
+.filter {
+	padding: 8px 12px;
+	background: #f8fafc;
+	color: #475467;
+}
+
+.filter.active {
+	border-color: #2563eb;
+	background: #eff6ff;
+	color: #1d4ed8;
+}
+
+.selective-demo {
+	display: grid;
+	gap: 14px;
+	padding: 20px 24px;
+	border-bottom: 1px solid #edf0f5;
+	background: #fbfcff;
+}
+
+.selective-demo h2 {
+	margin: 0;
+	font-size: 18px;
+	line-height: 1.3;
+}
+
+.selective-copy {
+	margin: 4px 0 0;
+	color: #667085;
+	font-size: 14px;
+}
+
+.selective-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px;
+}
+
+.selective-card {
+	display: grid;
+	gap: 8px;
+	min-height: 132px;
+	padding: 14px;
+	border: 1px solid #dbe4f0;
+	border-radius: 8px;
+	background: #ffffff;
+}
+
+.selective-card span {
+	color: #475467;
+	font-size: 14px;
+}
+
+.selective-card.hot {
+	border-color: #bfdbfe;
+	background: #eff6ff;
+}
+
+.selective-card.cold {
+	border-color: #d1fae5;
+	background: #f0fdf4;
+}
+
+.memo-lab {
+	display: grid;
+	gap: 14px;
+	padding: 20px 24px;
+	border-bottom: 1px solid #edf0f5;
+	background: #fbfcff;
+}
+
+.memo-lab h2 {
+	margin: 0;
+	font-size: 18px;
+	line-height: 1.3;
+}
+
+.memo-copy {
+	margin: 4px 0 0;
+	color: #667085;
+	font-size: 14px;
+}
+
+.memo-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 12px;
+}
+
+.memo-card {
+	display: grid;
+	gap: 8px;
+	min-height: 132px;
+	padding: 14px;
+	border: 1px solid #dbe4f0;
+	border-radius: 8px;
+	background: #ffffff;
+}
+
+.memo-card span {
+	color: #475467;
+	font-size: 14px;
+}
+
+.memo-count {
+	font-weight: 600;
+	color: #1d4ed8;
+}
+
+.memo-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+
+.memo-toggle {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	color: #475467;
+	font-size: 14px;
+}
+
+.list {
+	display: grid;
+	gap: 10px;
+	margin: 0;
+	padding: 24px;
+	list-style: none;
+}
+
+.todo,
+.empty {
+	min-height: 52px;
+	border: 1px solid #e4e7ec;
+	border-radius: 8px;
+	background: #ffffff;
+}
+
+.todo {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding: 10px 12px;
+}
+
+.todo.done {
+	background: #f8fafc;
+	color: #667085;
+}
+
+.todo.done span {
+	text-decoration: line-through;
+}
+
+.todo-label {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	min-width: 0;
+}
+
+.todo-label span {
+	overflow-wrap: anywhere;
+}
+
+.remove {
+	flex: 0 0 auto;
+	padding: 7px 10px;
+	background: #fff1f2;
+	color: #be123c;
+}
+
+.empty {
+	display: grid;
+	place-items: center;
+	color: #667085;
+}
+
+@media (max-width: 640px) {
+	.header {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.header-actions {
+		justify-content: flex-start;
+	}
+
+	.selective-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.memo-grid {
+		grid-template-columns: 1fr;
+	}
+}
