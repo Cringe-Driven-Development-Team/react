@@ -1,0 +1,41 @@
+{
+	"name": "@maninthecoat/react",
+	"version": "1.0.0",
+	"description": "Учебная реализация React",
+	"license": "MIT",
+	"repository": "https://github.com/Cringe-Driven-Development-Team/react",
+	"engines": {
+		"bun": ">=1.4.0"
+	},
+	"type": "module",
+	"main": "./dist/index.mjs",
+	"types": "./dist/index.d.mts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.mts",
+			"import": "./dist/index.mjs"
+		}
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"lint": "oxlint src",
+		"format": "oxfmt \"src/**/*.ts\"",
+		"format:check": "oxfmt \"src/**/*.ts\" --check",
+		"typecheck": "tsc --noEmit",
+		"build": "tsdown",
+		"check:dist": "bun run check-dist.ts",
+		"prepublishOnly": "bun run typecheck && bun run lint && bun run format:check && bun run build && bun run check:dist",
+		"release:patch": "bun pm version patch --no-git-tag-version && bun publish",
+		"release:minor": "bun pm version minor --no-git-tag-version && bun publish",
+		"release:major": "bun pm version major --no-git-tag-version && bun publish"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"oxfmt": "^0.64.0",
+		"oxlint": "^1.79.0",
+		"typescript": "^7.0.2",
+		"tsdown": "^0.23.0"
+	}
+}
