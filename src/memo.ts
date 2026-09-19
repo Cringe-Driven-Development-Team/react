@@ -1,5 +1,10 @@
-import { REACT_MEMO_TYPE, type RuntimeProps  } from "./types/element.ts";
-import type { ComponentProps, FunctionComponent, MemoCompare, MemoComponent } from "./types/component.ts";
+import { REACT_MEMO_TYPE, type RuntimeProps } from "./types/element.ts";
+import type {
+	ComponentProps,
+	FunctionComponent,
+	MemoCompare,
+	MemoComponent,
+} from "./types/component.ts";
 
 export function memo<Props extends ComponentProps>(
 	type: FunctionComponent<Props> & { $$typeof?: never },

@@ -33,7 +33,7 @@ export function reconcileChildren(
 			unkeyedFibers,
 			queueDeletion,
 		);
-		let newFiber: Fiber | null = null;
+		let newFiber: Fiber;
 
 		if (oldFiber) {
 			const oldIndex = oldFiber.index;

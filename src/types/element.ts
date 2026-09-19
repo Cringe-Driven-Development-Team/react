@@ -13,20 +13,20 @@ export type Key = string | number;
 export type RuntimeProps = Record<string, unknown>;
 
 export type ReactElementType =
-    | keyof HTMLElementTagNameMap
-    | FunctionComponent
-    | MemoComponent
-    | typeof REACT_ROOT_TYPE
-    | typeof REACT_FRAGMENT_TYPE
-    | typeof REACT_TEXT_TYPE;
+	| keyof HTMLElementTagNameMap
+	| FunctionComponent
+	| MemoComponent
+	| typeof REACT_ROOT_TYPE
+	| typeof REACT_FRAGMENT_TYPE
+	| typeof REACT_TEXT_TYPE;
 
 export interface ReactElement<Props extends ComponentProps = ComponentProps> {
-    $$typeof: typeof REACT_ELEMENT_TYPE;
-    type: ReactElementType;
-    key: Key | null;
-    props: Props & {
-        children: ReactElement[];
-    };
+	$$typeof: typeof REACT_ELEMENT_TYPE;
+	type: ReactElementType;
+	key: Key | null;
+	props: Props & {
+		children: ReactElement[];
+	};
 }
 
 export type ReactText = string | number;
