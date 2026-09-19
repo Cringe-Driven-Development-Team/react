@@ -1,5 +1,5 @@
-import { h, hFragment } from "../../src";
-import type { ReactElement } from "../../src";
+import { h, hFragment } from "@maninthecoat/react";
+import type { ReactElement } from "@maninthecoat/react";
 import type { HeaderTitleProps } from "./types.ts";
 
 export function HeaderTitle({

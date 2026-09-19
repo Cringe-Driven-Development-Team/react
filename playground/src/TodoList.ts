@@ -1,5 +1,5 @@
-import { h } from "../../src";
-import type { ReactElement } from "../../src";
+import { h } from "@maninthecoat/react";
+import type { ReactElement } from "@maninthecoat/react";
 import { TodoItem } from "./TodoItem.ts";
 import type { TodoListProps } from "./types.ts";
 

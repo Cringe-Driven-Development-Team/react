@@ -1,4 +1,4 @@
-import { createRoot, h } from "../../src";
+import { createRoot, h } from "@maninthecoat/react";
 import { App } from "./App.ts";
 import "./styles.css";
 

@@ -1,5 +1,5 @@
-import { h } from "../../src";
-import type { ReactElement } from "../../src";
+import { h } from "@maninthecoat/react";
+import type { ReactElement } from "@maninthecoat/react";
 import type { FilterButtonProps, FiltersProps } from "./types.ts";
 
 export function Filters({ value, onChange }: FiltersProps): ReactElement {

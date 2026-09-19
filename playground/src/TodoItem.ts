@@ -1,5 +1,5 @@
-import { h } from "../../src";
-import type { ReactElement } from "../../src";
+import { h } from "@maninthecoat/react";
+import type { ReactElement } from "@maninthecoat/react";
 import type { TodoItemProps } from "./types.ts";
 
 export function TodoItem({ todo, onToggle, onRemove }: TodoItemProps): ReactElement {

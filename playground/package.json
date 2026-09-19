@@ -9,6 +9,9 @@
     "preview": "vite preview",
     "lint": "oxlint src"
   },
+  "dependencies": {
+    "@maninthecoat/react": "^1.0.0"
+  },
   "devDependencies": {
     "typescript": "~7.0.2",
     "vite": "^8.2.2",

@@ -1,8 +1,7 @@
-import { h, useEffect, useLayoutEffect, useState } from "../../src";
-import type { ReactElement } from "../../src";
+import { h, useEffect, useLayoutEffect, useState } from "@maninthecoat/react";
+import type { ReactElement } from "@maninthecoat/react";
 import { Filters } from "./Filters.ts";
 import { Header } from "./Header.ts";
-import { MemoLab } from "./MemoLab.ts";
 import { SelectiveDemo } from "./SelectiveDemo.ts";
 import { TodoList } from "./TodoList.ts";
 import { Toolbar } from "./Toolbar.ts";
@@ -118,7 +117,6 @@ export function App(): ReactElement {
 				onChange: changeFilter,
 			}),
 			h(SelectiveDemo, {}),
-			h(MemoLab, {}),
 			h(TodoList, {
 				todos: visibleTodos,
 				onToggle: toggleTodo,

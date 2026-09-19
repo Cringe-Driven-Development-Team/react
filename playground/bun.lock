@@ -4,6 +4,9 @@
   "workspaces": {
     "": {
       "name": "playground",
+      "dependencies": {
+        "@maninthecoat/react": "^1.0.0",
+      },
       "devDependencies": {
         "oxlint": "^1.79.0",
         "typescript": "~7.0.2",
@@ -12,6 +15,8 @@
     },
   },
   "packages": {
+    "@maninthecoat/react": ["@maninthecoat/react@1.0.0", "", {}, "sha512-mKvAbb6SlnuNEvxfNkx99Miwm4B2oQbYBN02eOgJSa6X2UYTn7QQZGJ6wH8eb1yJDg5xeccFyFJC4Nqd651GRw=="],
+
     "@oxc-project/types": ["@oxc-project/types@0.146.0", "", {}, "sha512-XC0QsnnhVe7sLIWmYmdPw7x5P0h4W8vUU3Nv1ySgWXtvCz8NizoAEpGXA0sOYoJQV2Rl13LgURAHQ5cI5ILCSA=="],
 
     "@oxlint/binding-android-arm-eabi": ["@oxlint/binding-android-arm-eabi@1.79.0", "", { "os": "android", "cpu": "arm" }, "sha512-TebFaaMklO/RXzTv7PucaCq9l3X6D1gA+C8H6K4njtjFOV+zWE9MKLpulcJZN9bzytbUbQIY0mZuz12nQ5Kv4Q=="],

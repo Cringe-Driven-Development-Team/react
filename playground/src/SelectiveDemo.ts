@@ -1,5 +1,5 @@
-import { h, useEffect, useLayoutEffect, useState } from "../../src";
-import type { ReactElement } from "../../src";
+import { h, useEffect, useLayoutEffect, useState } from "@maninthecoat/react";
+import type { ReactElement } from "@maninthecoat/react";
 
 let selectiveDemoRenders = 0;
 let localCounterRenders = 0;
