@@ -1,11 +1,6 @@
-import {
-	REACT_ELEMENT_TYPE,
-	REACT_TEXT_TYPE,
-	type ReactElement,
-	type ReactNode,
-	type RenderableChild,
-} from "./types/element.ts";
-import type { ComponentProps } from "./types/component.ts";
+import { REACT_ELEMENT_TYPE, REACT_TEXT_TYPE } from "./symbols.ts";
+import type { ReactElement, ReactNode, RenderableChild } from "./types/element.ts";
+import type { ElementProps } from "./types/props.ts";
 
 const EMPTY_CHILDREN = Object.freeze<ReactElement[]>([]) as ReactElement[];
 
@@ -15,7 +10,7 @@ export const Children = {
 	},
 };
 
-export function isValidElement<Props extends ComponentProps = ComponentProps>(
+export function isValidElement<Props extends ElementProps = ElementProps>(
 	value: unknown,
 ): value is ReactElement<Props> {
 	return (

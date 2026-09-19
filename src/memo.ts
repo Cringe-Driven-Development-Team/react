@@ -1,12 +1,8 @@
-import { REACT_MEMO_TYPE, type RuntimeProps } from "./types/element.ts";
-import type {
-	ComponentProps,
-	FunctionComponent,
-	MemoCompare,
-	MemoComponent,
-} from "./types/component.ts";
+import { REACT_MEMO_TYPE } from "./symbols.ts";
+import type { FunctionComponent, MemoCompare, MemoComponent } from "./types/component.ts";
+import type { ElementProps, RuntimeProps } from "./types/props.ts";
 
-export function memo<Props extends ComponentProps>(
+export function memo<Props extends ElementProps>(
 	type: FunctionComponent<Props> & { $$typeof?: never },
 	compare?: MemoCompare<Props>,
 ): MemoComponent<Props> {
@@ -26,7 +22,7 @@ export function isMemoComponent(type: unknown): type is MemoComponent {
 	);
 }
 
-export function shallowEqual(previousProps: ComponentProps, nextProps: ComponentProps): boolean {
+export function shallowEqual(previousProps: ElementProps, nextProps: ElementProps): boolean {
 	const previous = previousProps as RuntimeProps;
 	const next = nextProps as RuntimeProps;
 	const previousKeys = Object.keys(previous);

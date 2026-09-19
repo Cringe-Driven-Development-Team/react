@@ -1,5 +1,6 @@
-import type { ComponentProps, FunctionComponent, MemoComponent } from "./component.ts";
-import type { ReactElementType, Key, ReactElement } from "./element.ts";
+import type { FunctionComponent, MemoComponent } from "./component.ts";
+import type { Key, ReactElement, ReactElementType } from "./element.ts";
+import type { ElementProps } from "./props.ts";
 import type { Hook } from "./hooks.ts";
 
 export const FiberFlags = {
@@ -39,7 +40,7 @@ export interface FiberRoot {
 	isUnmounted: boolean;
 }
 
-export interface Fiber<Props extends ComponentProps = ComponentProps> {
+export interface Fiber<Props extends ElementProps = ElementProps> {
 	tag: FiberTag;
 	type: ReactElementType;
 	key: Key | null;

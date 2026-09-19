@@ -1,5 +1,4 @@
-import type { RuntimeProps } from "./types/element.ts";
-import type { ComponentProps } from "./types/component.ts";
+import type { ElementProps, RuntimeProps } from "./types/props.ts";
 import { FiberTag, type Fiber } from "./types/fiber.ts";
 import { countProfilerEvent } from "./profiler.ts";
 
@@ -18,7 +17,7 @@ export function createDom(fiber: Fiber): Node {
 	return dom;
 }
 
-export function updateDom(dom: Node, prevProps: ComponentProps, nextProps: ComponentProps): void {
+export function updateDom(dom: Node, prevProps: ElementProps, nextProps: ElementProps): void {
 	countProfilerEvent("updateDomCalls");
 	const prev = prevProps as RuntimeProps;
 	const next = nextProps as RuntimeProps;
@@ -44,7 +43,7 @@ export function updateDom(dom: Node, prevProps: ComponentProps, nextProps: Compo
 		.forEach((name) => addEventListener(dom, name, next[name]));
 }
 
-export function cleanupDom(dom: Node, props: ComponentProps): void {
+export function cleanupDom(dom: Node, props: ElementProps): void {
 	const runtimeProps = props as RuntimeProps;
 
 	Object.keys(runtimeProps)

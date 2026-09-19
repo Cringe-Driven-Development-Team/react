@@ -17,7 +17,7 @@ if (!existsSync(distDir)) {
     fail("dist не найден: сначала запусти bun run build");
 }
 
-const files = [... new Glob("*.{mjs,d.mts}").scanSync({ cwd: distDir })].sort();
+const files = [...new Glob("*.{mjs,d.mts}").scanSync({ cwd: distDir })].sort();
 const hasRuntime = files.some((file) => file.endsWith(".mjs"));
 const hasDeclarations = files.some((file) => file.endsWith(".d.mts"));
 

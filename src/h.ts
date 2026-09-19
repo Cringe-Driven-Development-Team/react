@@ -1,26 +1,20 @@
-import {
-	type ReactNode,
-	type Key,
-	REACT_ELEMENT_TYPE,
-	REACT_FRAGMENT_TYPE,
-	type ReactElement,
-	type Tag,
-} from "./types/element.ts";
+import { REACT_ELEMENT_TYPE, REACT_FRAGMENT_TYPE } from "./symbols.ts";
+import type { Key, ReactElement, ReactNode, Tag } from "./types/element.ts";
 import { toChildren } from "./children.ts";
-import type { ComponentProps, FunctionComponent } from "./types/component.ts";
-import type { RuntimeProps } from "./types/element.ts";
+import type { FunctionComponent } from "./types/component.ts";
+import type { ElementProps, RuntimeProps } from "./types/props.ts";
 
-export function h<Props extends ComponentProps>(
+export function h<Props extends ElementProps>(
 	type: FunctionComponent<Props>,
 	props: (Omit<Props, "children"> & { key?: Key | null }) | null,
 	...children: ReactNode[]
 ): ReactElement<Props>;
 
-export function h(type: Tag, props: ComponentProps | null, ...children: ReactNode[]): ReactElement;
+export function h(type: Tag, props: ElementProps | null, ...children: ReactNode[]): ReactElement;
 
 export function h(
-	type: Tag | FunctionComponent<ComponentProps>,
-	props: ComponentProps | null,
+	type: Tag | FunctionComponent<ElementProps>,
+	props: ElementProps | null,
 	...children: ReactNode[]
 ): ReactElement {
 	const { key, ...restProps } = (props ?? {}) as RuntimeProps & { key?: unknown };

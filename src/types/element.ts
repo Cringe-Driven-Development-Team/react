@@ -1,16 +1,15 @@
-import type { FunctionComponent, MemoComponent, ComponentProps } from "./component.ts";
-
-export const REACT_ELEMENT_TYPE = Symbol.for("react.element");
-export const REACT_ROOT_TYPE = Symbol.for("react.root");
-export const REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
-export const REACT_TEXT_TYPE = Symbol.for("react.text");
-export const REACT_MEMO_TYPE = Symbol.for("react.memo");
+import type {
+	REACT_ELEMENT_TYPE,
+	REACT_FRAGMENT_TYPE,
+	REACT_ROOT_TYPE,
+	REACT_TEXT_TYPE,
+} from "../symbols.ts";
+import type { FunctionComponent, MemoComponent } from "./component.ts";
+import type { ElementProps } from "./props.ts";
 
 export type Tag = keyof HTMLElementTagNameMap;
 
 export type Key = string | number;
-
-export type RuntimeProps = Record<string, unknown>;
 
 export type ReactElementType =
 	| keyof HTMLElementTagNameMap
@@ -20,7 +19,7 @@ export type ReactElementType =
 	| typeof REACT_FRAGMENT_TYPE
 	| typeof REACT_TEXT_TYPE;
 
-export interface ReactElement<Props extends ComponentProps = ComponentProps> {
+export interface ReactElement<Props extends ElementProps = ElementProps> {
 	$$typeof: typeof REACT_ELEMENT_TYPE;
 	type: ReactElementType;
 	key: Key | null;

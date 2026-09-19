@@ -1,4 +1,5 @@
-import { REACT_FRAGMENT_TYPE, REACT_TEXT_TYPE, type ReactElement } from "./types/element.ts";
+import { REACT_FRAGMENT_TYPE, REACT_TEXT_TYPE } from "./symbols.ts";
+import type { ReactElement } from "./types/element.ts";
 import { FiberFlags, FiberTag, type Fiber } from "./types/fiber.ts";
 import { isMemoComponent } from "./memo.ts";
 
