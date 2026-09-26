@@ -62,8 +62,23 @@ const isGone =
 	(key: string): boolean =>
 		!(key in next);
 
-function getEventType(name: string): string {
-	return name.toLowerCase().substring(2);
+type EventBinding = {
+	type: string;
+	capture: boolean;
+};
+
+const CAPTURE_SUFFIX = "Capture";
+const POINTER_CAPTURE_EVENTS = new Set(["onGotPointerCapture", "onLostPointerCapture"]);
+const EVENT_TYPE_ALIASES: Record<string, string> = {
+	onDoubleClick: "dblclick",
+};
+
+function getEventBinding(name: string): EventBinding {
+	const capture = name.endsWith(CAPTURE_SUFFIX) && !POINTER_CAPTURE_EVENTS.has(name);
+	const propName = capture ? name.slice(0, -CAPTURE_SUFFIX.length) : name;
+	const type = EVENT_TYPE_ALIASES[propName] ?? propName.toLowerCase().substring(2);
+
+	return { type, capture };
 }
 
 function addEventListener(dom: Node, name: string, listener: unknown): void {
@@ -71,7 +86,8 @@ function addEventListener(dom: Node, name: string, listener: unknown): void {
 		return;
 	}
 
-	dom.addEventListener(getEventType(name), listener as EventListener);
+	const { type, capture } = getEventBinding(name);
+	dom.addEventListener(type, listener as EventListener, capture);
 }
 
 function removeEventListener(dom: Node, name: string, listener: unknown): void {
@@ -79,7 +95,8 @@ function removeEventListener(dom: Node, name: string, listener: unknown): void {
 		return;
 	}
 
-	dom.removeEventListener(getEventType(name), listener as EventListener);
+	const { type, capture } = getEventBinding(name);
+	dom.removeEventListener(type, listener as EventListener, capture);
 }
 
 function setDomProperty(dom: Node, name: string, value: unknown, prevValue?: unknown): void {
@@ -90,6 +107,11 @@ function setDomProperty(dom: Node, name: string, value: unknown, prevValue?: unk
 
 	if ((name === "class" || name === "className") && dom instanceof Element) {
 		setClassProperty(dom, value);
+		return;
+	}
+
+	if (OVERLOADED_BOOLEAN_ATTRIBUTES.has(name) && dom instanceof Element) {
+		setOverloadedBooleanAttribute(dom, name, value);
 		return;
 	}
 
@@ -128,6 +150,17 @@ function removeDomProperty(dom: Node, name: string): void {
 	}
 }
 
+const OVERLOADED_BOOLEAN_ATTRIBUTES = new Set(["download"]);
+
+function setOverloadedBooleanAttribute(dom: Element, name: string, value: unknown): void {
+	if (value === null || value === undefined || value === false) {
+		dom.removeAttribute(name);
+		return;
+	}
+
+	dom.setAttribute(name, value === true ? "" : String(value));
+}
+
 function setClassProperty(dom: Element, value: unknown): void {
 	if (value === null || value === undefined || value === false) {
 		dom.removeAttribute("class");
@@ -160,8 +193,47 @@ function setStyleProperty(dom: Element, value: unknown, prevValue: unknown): voi
 	});
 }
 
+const UNITLESS_STYLE_PROPERTIES = new Set([
+	"animationIterationCount",
+	"aspectRatio",
+	"borderImageOutset",
+	"borderImageSlice",
+	"borderImageWidth",
+	"columnCount",
+	"columns",
+	"flex",
+	"flexGrow",
+	"flexShrink",
+	"fontWeight",
+	"gridArea", //
+	"gridColumn",
+	"gridColumnEnd",
+	"gridColumnStart",
+	"gridRow",
+	"gridRowEnd",
+	"gridRowStart",
+	"lineClamp",
+	"lineHeight",
+	"opacity",
+	"order",
+	"orphans",
+	"scale",
+	"tabSize",
+	"widows",
+	"zIndex",
+	"zoom",
+	"fillOpacity",
+	"floodOpacity",
+	"stopOpacity",
+	"strokeDasharray",
+	"strokeDashoffset",
+	"strokeMiterlimit",
+	"strokeOpacity",
+	"strokeWidth",
+]);
+
 function setStyleValue(style: CSSStyleDeclaration, name: string, value: unknown): void {
-	const normalizedValue = value === null || value === undefined ? "" : String(value);
+	const normalizedValue = normalizeStyleValue(name, value);
 
 	if (name.startsWith("--") || name.includes("-")) {
 		style.setProperty(name, normalizedValue);
@@ -169,6 +241,26 @@ function setStyleValue(style: CSSStyleDeclaration, name: string, value: unknown)
 	}
 
 	(style as unknown as Record<string, string>)[name] = normalizedValue;
+}
+
+function normalizeStyleValue(name: string, value: unknown): string {
+	if (value === null || value === undefined) {
+		return "";
+	}
+
+	if (typeof value === "number" && value !== 0 && !isUnitlessStyleProperty(name)) {
+		return `${value}px`;
+	}
+
+	return String(value);
+}
+
+function isUnitlessStyleProperty(name: string): boolean {
+	return name.startsWith("--") || UNITLESS_STYLE_PROPERTIES.has(toCamelCase(name));
+}
+
+function toCamelCase(name: string): string {
+	return name.replace(/-([a-z])/g, (_match, letter: string) => letter.toUpperCase());
 }
 
 function isStyleObject(
