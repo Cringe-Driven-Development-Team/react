@@ -6,6 +6,7 @@
     "module": "Preserve",
     "moduleDetection": "force",
     "jsx": "react-jsx",
+    "jsxImportSource": "@maninthecoat/react",
     "allowJs": true,
     "types": ["bun"],
 
@@ -14,6 +15,11 @@
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "noEmit": true,
+    "paths": {
+      "@maninthecoat/react": ["./src/index.ts"],
+      "@maninthecoat/react/jsx-runtime": ["./src/jsx-runtime.ts"],
+      "@maninthecoat/react/jsx-dev-runtime": ["./src/jsx-dev-runtime.ts"]
+    },
 
     // Best practices
     "strict": true,
