@@ -6,6 +6,11 @@ export interface FunctionComponent<Props extends ElementProps = ElementProps> {
 	(props: Props): ReactElement | null;
 }
 
+export interface ExoticComponent<Props extends ElementProps = ElementProps> {
+	(props: Props): ReactElement | null;
+	readonly $$typeof: symbol;
+}
+
 export interface MemoCompare<Props extends ElementProps = ElementProps> {
 	(previousProps: Props, nextProps: Props): boolean;
 }

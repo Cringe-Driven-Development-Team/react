@@ -56,3 +56,7 @@ export type TodoItemProps = {
 	onToggle: (id: number) => void;
 	onRemove: (id: number) => void;
 };
+
+export type MemoCardProps = {
+	label: string;
+};

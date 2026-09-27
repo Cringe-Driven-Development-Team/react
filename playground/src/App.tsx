@@ -1,10 +1,12 @@
-import { h, useEffect, useLayoutEffect, useState } from "@maninthecoat/react";
+import { useEffect, useLayoutEffect, useState } from "@maninthecoat/react";
 import type { ReactElement } from "@maninthecoat/react";
-import { Filters } from "./Filters.ts";
-import { Header } from "./Header.ts";
-import { SelectiveDemo } from "./SelectiveDemo.ts";
-import { TodoList } from "./TodoList.ts";
-import { Toolbar } from "./Toolbar.ts";
+import { Filters } from "./Filters.tsx";
+import { Header } from "./Header.tsx";
+import { JsxFeatures } from "./JsxFeatures.tsx";
+import { Memoized } from "./Memoized.tsx";
+import { SelectiveDemo } from "./SelectiveDemo.tsx";
+import { TodoList } from "./TodoList.tsx";
+import { Toolbar } from "./Toolbar.tsx";
 import type { Filter, Todo } from "./types.ts";
 
 const initialTodos: Todo[] = [
@@ -92,38 +94,27 @@ export function App(): ReactElement {
 		setShowStats((visible) => !visible);
 	}
 
-	function changeFilter(nextFilter: Filter): void {
-		setFilter(nextFilter);
-	}
-
-	return h("main", { class: "app" }, [
-		h("section", { class: "panel" }, [
-			h(Header, {
-				total: todos.length,
-				completed: completedCount,
-				titleStatus,
-				showStats,
-				renderCount,
-				onAdd: addTodo,
-				onToggleStats: toggleStats,
-			}),
-			h(Toolbar, {
-				onReverse: reverseTodos,
-				onRotate: rotateTodos,
-				onSort: sortTodos,
-			}),
-			h(Filters, {
-				value: filter,
-				onChange: changeFilter,
-			}),
-			h(SelectiveDemo, {}),
-			h(TodoList, {
-				todos: visibleTodos,
-				onToggle: toggleTodo,
-				onRemove: removeTodo,
-			}),
-		]),
-	]);
+	return (
+		<main class="app">
+			<section class="panel">
+				<Header
+					total={todos.length}
+					completed={completedCount}
+					titleStatus={titleStatus}
+					showStats={showStats}
+					renderCount={renderCount}
+					onAdd={addTodo}
+					onToggleStats={toggleStats}
+				/>
+				<Toolbar onReverse={reverseTodos} onRotate={rotateTodos} onSort={sortTodos} />
+				<Filters value={filter} onChange={setFilter} />
+				<SelectiveDemo />
+				<Memoized />
+				<JsxFeatures />
+				<TodoList todos={visibleTodos} onToggle={toggleTodo} onRemove={removeTodo} />
+			</section>
+		</main>
+	);
 }
 
 function getVisibleTodos(todos: Todo[], filter: Filter): Todo[] {

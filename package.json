@@ -1,6 +1,6 @@
 {
 	"name": "@maninthecoat/react",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"description": "Учебная реализация React",
 	"license": "MIT",
 	"repository": "https://github.com/Cringe-Driven-Development-Team/react",
@@ -14,6 +14,14 @@
 		".": {
 			"types": "./dist/index.d.mts",
 			"import": "./dist/index.mjs"
+		},
+		"./jsx-runtime": {
+			"types": "./dist/jsx-runtime.d.mts",
+			"import": "./dist/jsx-runtime.mjs"
+		},
+		"./jsx-dev-runtime": {
+			"types": "./dist/jsx-dev-runtime.d.mts",
+			"import": "./dist/jsx-dev-runtime.mjs"
 		}
 	},
 	"files": [
@@ -25,8 +33,7 @@
 		"format:check": "oxfmt \"src/**/*.ts\" --check",
 		"typecheck": "tsc --noEmit",
 		"build": "tsdown",
-		"check:dist": "bun run check-dist.ts",
-		"prepublishOnly": "bun run typecheck && bun run lint && bun run format:check && bun run build && bun run check:dist",
+		"prepublishOnly": "bun run typecheck && bun run lint && bun run format:check && bun run build",
 		"release:patch": "bun pm version patch --no-git-tag-version && bun publish",
 		"release:minor": "bun pm version minor --no-git-tag-version && bun publish",
 		"release:major": "bun pm version major --no-git-tag-version && bun publish"

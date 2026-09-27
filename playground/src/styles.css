@@ -188,6 +188,52 @@ h1 {
 	background: #f0fdf4;
 }
 
+.memo-lab {
+	display: grid;
+	gap: 14px;
+	padding: 20px 24px;
+	border-bottom: 1px solid #edf0f5;
+	background: #fbfcff;
+}
+
+.memo-lab h2 {
+	margin: 0;
+	font-size: 18px;
+	line-height: 1.3;
+}
+
+.memo-copy {
+	margin: 4px 0 0;
+	color: #667085;
+	font-size: 14px;
+}
+
+.memo-card {
+	display: grid;
+	gap: 8px;
+	padding: 14px;
+	border: 1px solid #dbe4f0;
+	border-radius: 8px;
+	background: #ffffff;
+}
+
+.memo-card span {
+	color: #475467;
+	font-size: 14px;
+}
+
+.memo-count {
+	font-weight: 600;
+	color: #1d4ed8;
+}
+
+.memo-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+
 .list {
 	display: grid;
 	gap: 10px;
@@ -258,4 +304,63 @@ h1 {
 	.selective-grid {
 		grid-template-columns: 1fr;
 	}
+}
+
+.jsx-features {
+	display: grid;
+	gap: 14px;
+	padding: 20px 24px;
+	border-bottom: 1px solid #edf0f5;
+	background: #fbfcff;
+}
+
+.jsx-features h2 {
+	margin: 0;
+	line-height: 1.3;
+}
+
+.jsx-copy {
+	margin: 4px 0 0;
+	color: #667085;
+	font-size: 14px;
+}
+
+.jsx-terms {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	gap: 4px 12px;
+	margin: 0;
+	padding: 14px;
+	border: 1px solid #dbe4f0;
+	border-radius: 8px;
+	background: #ffffff;
+}
+
+.jsx-terms dt {
+	font-weight: 600;
+	color: #1d4ed8;
+}
+
+.jsx-terms dd {
+	margin: 0;
+	color: #475467;
+}
+
+.jsx-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+
+.jsx-actions a.action {
+	text-decoration: none;
+}
+
+.jsx-log {
+	margin: 0;
+	min-height: 1.5em;
+	color: #475569;
+	font-family: ui-monospace, monospace;
+	font-size: 13px;
 }

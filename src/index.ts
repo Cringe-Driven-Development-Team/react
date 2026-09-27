@@ -1,5 +1,7 @@
 export { Children, isValidElement } from "./children.ts";
+export { createElement } from "./create-element.ts";
 export { h, hFragment } from "./h.ts";
+export { Fragment } from "./jsx-runtime.ts";
 export { memo } from "./memo.ts";
 
 export { createRoot } from "./render.ts";
