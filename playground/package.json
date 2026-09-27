@@ -10,7 +10,7 @@
     "lint": "oxlint src"
   },
   "dependencies": {
-    "@maninthecoat/react": "^1.0.0"
+    "@maninthecoat/react": "^1.1.0"
   },
   "devDependencies": {
     "typescript": "~7.0.2",

@@ -13,6 +13,9 @@
     "moduleDetection": "force",
     "noEmit": true,
 
+    "jsx": "react-jsx",
+    "jsxImportSource": "@maninthecoat/react",
+
     /* Linting */
     "noUnusedLocals": true,
     "noUnusedParameters": true,
