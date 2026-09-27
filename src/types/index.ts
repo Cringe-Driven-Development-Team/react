@@ -16,4 +16,13 @@ export type {
 } from "./element.ts";
 
 export type { Dispatch, StateAction } from "./hooks.ts";
-export type { AnchorHTMLAttributes, JSX, MouseEvent } from "./jsx.ts";
+export type {
+	AnchorHTMLAttributes,
+	AriaAttributes,
+	Attributes,
+	CSSProperties,
+	DOMAttributes,
+	BaseHTMLAttributes,
+	JSX,
+	MouseEvent,
+} from "./jsx.ts";

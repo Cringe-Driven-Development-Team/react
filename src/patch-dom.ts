@@ -205,7 +205,7 @@ const UNITLESS_STYLE_PROPERTIES = new Set([
 	"flexGrow",
 	"flexShrink",
 	"fontWeight",
-	"gridArea", //
+	"gridArea",
 	"gridColumn",
 	"gridColumnEnd",
 	"gridColumnStart",

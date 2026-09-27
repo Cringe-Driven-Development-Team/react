@@ -9,10 +9,6 @@ type JsxProps = RuntimeProps & {
 	children?: ReactNode;
 };
 
-type CreateElementProps = RuntimeProps & {
-	key?: Key | null;
-};
-
 export const Fragment = REACT_FRAGMENT_TYPE as unknown as ExoticComponent<{
 	children?: ReactNode;
 }>;
@@ -49,17 +45,6 @@ export function jsx(type: RuntimeElementType, props: JsxProps | null, key?: Key)
 
 export function jsxs(type: RuntimeElementType, props: JsxProps | null, key?: Key): ReactElement {
 	return jsx(type, props, key);
-}
-
-export function createElement(
-	type: RuntimeElementType,
-	props: CreateElementProps | null,
-	...children: ReactNode[]
-): ReactElement {
-	const { key, ...config } = props ?? {};
-	const jsxProps: JsxProps = children.length === 0 ? config : { ...config, children };
-
-	return jsx(type, jsxProps, key ?? undefined);
 }
 
 export type { JSX } from "./types/jsx.ts";
