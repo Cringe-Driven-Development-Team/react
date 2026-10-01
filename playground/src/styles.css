@@ -46,6 +46,29 @@ h1 {
 	line-height: 1.2;
 }
 
+.title-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.theme-pill {
+	padding: 3px 8px;
+	border: 1px solid #bfdbfe;
+	border-radius: 999px;
+	background: #eff6ff;
+	color: #1d4ed8;
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: capitalize;
+}
+
+.theme-pill.dark {
+	border-color: #475569;
+	background: #0f172a;
+	color: #e2e8f0;
+}
+
 .subtitle {
 	margin: 6px 0 0;
 	color: #667085;
@@ -234,6 +257,57 @@ h1 {
 	gap: 8px;
 }
 
+.nested-provider-demo {
+	display: grid;
+	gap: 14px;
+	padding: 20px 24px;
+	border-bottom: 1px solid #edf0f5;
+	background: #fffdf7;
+}
+
+.nested-provider-demo h2 {
+	margin: 0;
+	font-size: 18px;
+	line-height: 1.3;
+}
+
+.nested-provider-copy {
+	margin: 4px 0 0;
+	color: #667085;
+	font-size: 14px;
+}
+
+.nested-provider-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px;
+}
+
+.nested-provider-card {
+	display: grid;
+	gap: 8px;
+	min-height: 100px;
+	padding: 14px;
+	border: 1px solid #dbe4f0;
+	border-radius: 8px;
+	background: #ffffff;
+}
+
+.nested-provider-card span {
+	color: #475467;
+	font-size: 14px;
+}
+
+.nested-provider-card.outer {
+	border-color: #bfdbfe;
+	background: #eff6ff;
+}
+
+.nested-provider-card.inner {
+	border-color: #fde68a;
+	background: #fffbeb;
+}
+
 .list {
 	display: grid;
 	gap: 10px;
@@ -261,6 +335,15 @@ h1 {
 .todo.done {
 	background: #f8fafc;
 	color: #667085;
+}
+
+.todo.theme-dark {
+	border-color: #cbd5e1;
+	background: #f8fafc;
+}
+
+.todo.theme-dark:not(.done) {
+	background: #eef2ff;
 }
 
 .todo.done span {
@@ -304,63 +387,8 @@ h1 {
 	.selective-grid {
 		grid-template-columns: 1fr;
 	}
-}
 
-.jsx-features {
-	display: grid;
-	gap: 14px;
-	padding: 20px 24px;
-	border-bottom: 1px solid #edf0f5;
-	background: #fbfcff;
-}
-
-.jsx-features h2 {
-	margin: 0;
-	line-height: 1.3;
-}
-
-.jsx-copy {
-	margin: 4px 0 0;
-	color: #667085;
-	font-size: 14px;
-}
-
-.jsx-terms {
-	display: grid;
-	grid-template-columns: max-content 1fr;
-	gap: 4px 12px;
-	margin: 0;
-	padding: 14px;
-	border: 1px solid #dbe4f0;
-	border-radius: 8px;
-	background: #ffffff;
-}
-
-.jsx-terms dt {
-	font-weight: 600;
-	color: #1d4ed8;
-}
-
-.jsx-terms dd {
-	margin: 0;
-	color: #475467;
-}
-
-.jsx-actions {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: 8px;
-}
-
-.jsx-actions a.action {
-	text-decoration: none;
-}
-
-.jsx-log {
-	margin: 0;
-	min-height: 1.5em;
-	color: #475569;
-	font-family: ui-monospace, monospace;
-	font-size: 13px;
+	.nested-provider-grid {
+		grid-template-columns: 1fr;
+	}
 }

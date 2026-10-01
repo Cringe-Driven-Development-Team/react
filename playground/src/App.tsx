@@ -2,11 +2,12 @@ import { useEffect, useLayoutEffect, useState } from "@maninthecoat/react";
 import type { ReactElement } from "@maninthecoat/react";
 import { Filters } from "./Filters.tsx";
 import { Header } from "./Header.tsx";
-import { JsxFeatures } from "./JsxFeatures.tsx";
 import { Memoized } from "./Memoized.tsx";
+import { nestedProviderDemoFixture } from "./NestedProviderDemo.tsx";
 import { SelectiveDemo } from "./SelectiveDemo.tsx";
 import { TodoList } from "./TodoList.tsx";
 import { Toolbar } from "./Toolbar.tsx";
+import { ThemeContext, type Theme } from "./theme.ts";
 import type { Filter, Todo } from "./types.ts";
 
 const initialTodos: Todo[] = [
@@ -29,6 +30,7 @@ export function App(): ReactElement {
 	const [todos, setTodos] = useState(initialTodos);
 	const [filter, setFilter] = useState<Filter>("all");
 	const [showStats, setShowStats] = useState(true);
+	const [theme, setTheme] = useState<Theme>("light");
 	const visibleTodos = getVisibleTodos(todos, filter);
 	const completedCount = todos.filter((todo) => todo.done).length;
 	const titleStatus = `${completedCount}/${todos.length} completed`;
@@ -94,26 +96,37 @@ export function App(): ReactElement {
 		setShowStats((visible) => !visible);
 	}
 
+	function toggleTheme(): void {
+		setTheme((currentTheme) => (currentTheme === "light" ? "dark" : "light"));
+	}
+
 	return (
-		<main class="app">
-			<section class="panel">
-				<Header
-					total={todos.length}
-					completed={completedCount}
-					titleStatus={titleStatus}
-					showStats={showStats}
-					renderCount={renderCount}
-					onAdd={addTodo}
-					onToggleStats={toggleStats}
-				/>
-				<Toolbar onReverse={reverseTodos} onRotate={rotateTodos} onSort={sortTodos} />
-				<Filters value={filter} onChange={setFilter} />
-				<SelectiveDemo />
-				<Memoized />
-				<JsxFeatures />
-				<TodoList todos={visibleTodos} onToggle={toggleTodo} onRemove={removeTodo} />
-			</section>
-		</main>
+		<ThemeContext value={theme}>
+			<main class="app">
+				<section class="panel">
+					<Header
+						total={todos.length}
+						completed={completedCount}
+						titleStatus={titleStatus}
+						showStats={showStats}
+						renderCount={renderCount}
+						onAdd={addTodo}
+						onToggleStats={toggleStats}
+					/>
+					<Toolbar
+						onReverse={reverseTodos}
+						onRotate={rotateTodos}
+						onSort={sortTodos}
+						onToggleTheme={toggleTheme}
+					/>
+					<Filters value={filter} onChange={setFilter} />
+					<SelectiveDemo />
+					<Memoized />
+					{nestedProviderDemoFixture}
+					<TodoList todos={visibleTodos} onToggle={toggleTodo} onRemove={removeTodo} />
+				</section>
+			</main>
+		</ThemeContext>
 	);
 }
 
