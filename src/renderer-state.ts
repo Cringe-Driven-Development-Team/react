@@ -36,6 +36,7 @@ export function createRenderRoot(root: FiberRoot, element: ReactElement): Fiber 
 		subtreeFlags: FiberFlags.NO_FLAGS,
 		dirty: true,
 		hasDirtySubtree: false,
+		hasContextUpdate: false,
 	};
 
 	rootFiber.tag = FiberTag.ROOT;
@@ -56,6 +57,7 @@ export function createRenderRoot(root: FiberRoot, element: ReactElement): Fiber 
 	rootFiber.subtreeFlags = FiberFlags.NO_FLAGS;
 	rootFiber.dirty = true;
 	rootFiber.hasDirtySubtree = root.currentRoot?.hasDirtySubtree ?? false;
+	rootFiber.hasContextUpdate = false;
 	delete rootFiber.didBailout;
 
 	if (root.currentRoot) {
@@ -178,6 +180,7 @@ function finalizeCommittedTree(fiber: Fiber | null): void {
 			alternate.subtreeFlags = FiberFlags.NO_FLAGS;
 			alternate.dirty = false;
 			alternate.hasDirtySubtree = false;
+			alternate.hasContextUpdate = false;
 			delete alternate.didBailout;
 		}
 
@@ -186,6 +189,7 @@ function finalizeCommittedTree(fiber: Fiber | null): void {
 		current.subtreeFlags = FiberFlags.NO_FLAGS;
 		current.dirty = false;
 		current.hasDirtySubtree = false;
+		current.hasContextUpdate = false;
 		delete current.didBailout;
 		dropAppliedActions(current);
 

@@ -2,6 +2,7 @@ import type { FunctionComponent, MemoComponent } from "./component.ts";
 import type { Key, ReactElement, ReactElementType } from "./element.ts";
 import type { ElementProps } from "./props.ts";
 import type { Hook } from "./hooks.ts";
+import type { Context, ContextDependency } from "./context.ts";
 
 export const FiberFlags = {
 	NO_FLAGS: 0,
@@ -28,6 +29,7 @@ export const FiberTag = {
 	FRAGMENT: "fragment",
 	FUNCTION_COMPONENT: "function-component",
 	MEMO_COMPONENT: "memo-component",
+	CONTEXT_PROVIDER: "context-provider",
 } as const;
 
 export type FiberTag = (typeof FiberTag)[keyof typeof FiberTag];
@@ -57,8 +59,10 @@ export interface Fiber<Props extends ElementProps = ElementProps> {
 	flags: FiberFlags;
 	subtreeFlags: FiberFlags;
 	hooks?: Hook[];
+	contextDependencies?: ContextDependency[];
 	dirty: boolean;
 	hasDirtySubtree: boolean;
+	hasContextUpdate: boolean;
 	didBailout?: boolean;
 	root?: FiberRoot;
 }
@@ -71,6 +75,11 @@ export type FunctionComponentFiber = Fiber & {
 export type MemoComponentFiber = Fiber & {
 	tag: typeof FiberTag.MEMO_COMPONENT;
 	type: MemoComponent;
+};
+
+export type ContextProviderFiber = Fiber & {
+	tag: typeof FiberTag.CONTEXT_PROVIDER;
+	type: Context<unknown>;
 };
 
 export type QueueDeletion = (parent: Fiber, fiber: Fiber) => void;

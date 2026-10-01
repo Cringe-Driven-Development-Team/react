@@ -4,6 +4,8 @@ import type { ExoticComponent, FunctionComponent, MemoComponent } from "./types/
 import type { Key, ReactElement, ReactNode, Tag } from "./types/element.ts";
 import type { ElementProps, RuntimeProps } from "./types/props.ts";
 import { isMemoComponent } from "./memo.ts";
+import { isContext } from "./context.ts";
+import type { Context, ContextProviderProps } from "./types/context.ts";
 
 type JsxProps = RuntimeProps & {
 	children?: ReactNode;
@@ -16,6 +18,7 @@ type RuntimeElementType =
 	| Tag
 	| FunctionComponent<ElementProps>
 	| MemoComponent<ElementProps>
+	| Context<unknown>
 	| typeof Fragment;
 
 export function jsx(type: RuntimeElementType, props: JsxProps | null, key?: Key): ReactElement {
@@ -26,6 +29,10 @@ export function jsx(type: RuntimeElementType, props: JsxProps | null, key?: Key)
 
 	if (type === Fragment) {
 		return hFragment(normalizedChildren, key);
+	}
+
+	if (isContext(type)) {
+		return h(type, propsWithKey as unknown as ContextProviderProps<unknown>, ...normalizedChildren);
 	}
 
 	if (isMemoComponent(type)) {

@@ -17,12 +17,15 @@ import {
 import { createWorkInProgressFiber } from "./fiber-pair.ts";
 import { bubbleSubtreeFlags } from "./flags.ts";
 import { shallowEqual } from "./memo.ts";
+import { propagateContextChange, warnIfProviderValueMissing } from "./context.ts";
 import { countProfilerEvent } from "./profiler.ts";
 
 export function performUnitOfWork(fiber: Fiber): Fiber | null {
 	countProfilerEvent("unitsOfWork");
 
-	if (isFunctionComponentFiber(fiber)) {
+	if (fiber.tag === FiberTag.CONTEXT_PROVIDER) {
+		updateContextProvider(fiber);
+	} else if (isFunctionComponentFiber(fiber)) {
 		updateFunctionComponent(fiber);
 	} else if (isMemoComponentFiber(fiber)) {
 		updateMemoComponent(fiber);
@@ -152,7 +155,12 @@ function updateFunctionComponent(fiber: FunctionComponentFiber): void {
 }
 
 function canBailoutFunctionComponent(fiber: FunctionComponentFiber): boolean {
-	return Boolean(fiber.alternate && !fiber.dirty && fiber.props === fiber.alternate.props);
+	return Boolean(
+		fiber.alternate &&
+		!fiber.dirty &&
+		!fiber.hasContextUpdate &&
+		fiber.props === fiber.alternate.props,
+	);
 }
 
 function isMemoComponentFiber(fiber: Fiber): fiber is MemoComponentFiber {
@@ -188,7 +196,7 @@ function canBailoutMemoComponent(
 	fiber: MemoComponentFiber,
 ): fiber is MemoComponentFiber & { alternate: Fiber } {
 	const alternate = fiber.alternate;
-	if (!alternate || fiber.dirty) {
+	if (!alternate || fiber.dirty || fiber.hasContextUpdate) {
 		return false;
 	}
 
@@ -225,6 +233,12 @@ function cloneChildFibers(parent: Fiber, deep: boolean): void {
 }
 
 function updateFragmentComponent(fiber: Fiber): void {
+	reconcileChildren(fiber, fiber.props.children, queueDeletion);
+}
+
+function updateContextProvider(fiber: Fiber): void {
+	warnIfProviderValueMissing(fiber);
+	propagateContextChange(fiber);
 	reconcileChildren(fiber, fiber.props.children, queueDeletion);
 }
 

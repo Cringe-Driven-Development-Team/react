@@ -6,6 +6,7 @@ import type {
 } from "../symbols.ts";
 import type { FunctionComponent, MemoComponent } from "./component.ts";
 import type { ElementProps } from "./props.ts";
+import type { Context } from "./context.ts";
 
 export type Tag = keyof HTMLElementTagNameMap;
 
@@ -15,6 +16,7 @@ export type ReactElementType =
 	| keyof HTMLElementTagNameMap
 	| FunctionComponent
 	| MemoComponent
+	| Context<unknown>
 	| typeof REACT_ROOT_TYPE
 	| typeof REACT_FRAGMENT_TYPE
 	| typeof REACT_TEXT_TYPE;

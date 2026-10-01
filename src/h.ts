@@ -3,6 +3,13 @@ import type { Key, ReactElement, ReactNode, Tag } from "./types/element.ts";
 import { toChildren } from "./children.ts";
 import type { FunctionComponent } from "./types/component.ts";
 import type { ElementProps, RuntimeProps } from "./types/props.ts";
+import type { Context, ContextProviderProps } from "./types/context.ts";
+
+export function h<Value>(
+	type: Context<Value>,
+	props: (ContextProviderProps<Value> & { key?: Key | null }) | null,
+	...children: ReactNode[]
+): ReactElement;
 
 export function h<Props extends ElementProps>(
 	type: FunctionComponent<Props>,
@@ -13,7 +20,7 @@ export function h<Props extends ElementProps>(
 export function h(type: Tag, props: ElementProps | null, ...children: ReactNode[]): ReactElement;
 
 export function h(
-	type: Tag | FunctionComponent<ElementProps>,
+	type: Tag | FunctionComponent<ElementProps> | Context<unknown>,
 	props: ElementProps | null,
 	...children: ReactNode[]
 ): ReactElement {
