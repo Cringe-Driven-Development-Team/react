@@ -14,6 +14,8 @@ import {
 import type { Fiber, FiberRoot } from "./types/fiber.ts";
 import { getFiberRoot, markFiberDirty } from "./renderer-state.ts";
 import { getFlagForEffectKind } from "./flags.ts";
+import { readContextValue } from "./context.ts";
+import type { Context } from "./types/context.ts";
 import { countProfilerEvent } from "./profiler.ts";
 
 const RE_RENDER_LIMIT = 25;
@@ -49,6 +51,7 @@ export function prepareToUseHooks(fiber: Fiber): void {
 	currentlyRenderingFiber = fiber;
 	hookIndex = 0;
 	currentlyRenderingFiber.hooks = [];
+	currentlyRenderingFiber.contextDependencies = [];
 }
 
 export function finishHooks(): void {
@@ -101,6 +104,14 @@ export function useState<State>(initial: State): [State, Dispatch<State>] {
 	hookIndex += 1;
 
 	return [hook.state, hook.dispatch];
+}
+
+export function useContext<Value>(context: Context<Value>): Value {
+	if (!currentlyRenderingFiber) {
+		throw new Error("Render.useContext must be called inside a function component.");
+	}
+
+	return readContextValue(currentlyRenderingFiber, context);
 }
 
 export function useEffect(callback: EffectCallback, deps?: EffectDeps): void {

@@ -31,6 +31,7 @@ export type ToolbarProps = {
 	onReverse: () => void;
 	onRotate: () => void;
 	onSort: () => void;
+	onToggleTheme: () => void;
 };
 
 export type FiltersProps = {

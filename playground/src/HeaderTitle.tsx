@@ -1,4 +1,5 @@
-import type { ReactElement } from "@maninthecoat/react";
+import {useContext, type ReactElement } from "@maninthecoat/react";
+import { ThemeContext } from "./theme.ts";
 import type { HeaderTitleProps } from "./types.ts";
 
 export function HeaderTitle({
@@ -6,9 +7,14 @@ export function HeaderTitle({
 	completed,
 	renderCount,
 }: HeaderTitleProps): ReactElement {
+	const theme = useContext(ThemeContext);
+
 	return (
 		<>
-			<h1>subtree flags todo</h1>
+			<div class="title-row">
+				<h1>context todo</h1>
+				<span class={theme === "dark" ? "theme-pill dark" : "theme-pill"}>{theme}</span>
+			</div>
 			<p class="subtitle">
 				{total} total, {completed} completed
 			</p>

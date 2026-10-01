@@ -4,6 +4,7 @@ export type {
 	MemoCompare,
 	MemoComponent,
 } from "./component.ts";
+export type { Context, ContextProviderProps } from "./context.ts";
 
 export type {
 	Key,

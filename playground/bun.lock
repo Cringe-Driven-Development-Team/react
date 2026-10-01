@@ -5,7 +5,7 @@
     "": {
       "name": "playground",
       "dependencies": {
-        "@maninthecoat/react": "^1.1.0",
+        "@maninthecoat/react": "^1.2.0",
       },
       "devDependencies": {
         "oxlint": "^1.79.0",
@@ -15,7 +15,7 @@
     },
   },
   "packages": {
-    "@maninthecoat/react": ["@maninthecoat/react@1.1.0", "", {}, "sha512-oV4GEfPOIbYG7tnRDfUqiSuGjyqjYqlGRd5O+iODdVcnSlTWxEkFYztivawUX3LEemn34XWBZPQxGlOwmG73EQ=="],
+    "@maninthecoat/react": ["@maninthecoat/react@1.2.0", "", {}, "sha512-xdbIX05A/Qc4Z041nSJjH2N4edlEq1HLbJIaawLSW90AafeSehe7LZkei6zQgz6fXmerNVbgK74ruNqzDfsR0g=="],
 
     "@oxc-project/types": ["@oxc-project/types@0.146.0", "", {}, "sha512-XC0QsnnhVe7sLIWmYmdPw7x5P0h4W8vUU3Nv1ySgWXtvCz8NizoAEpGXA0sOYoJQV2Rl13LgURAHQ5cI5ILCSA=="],
 

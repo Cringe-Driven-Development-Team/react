@@ -1,6 +1,7 @@
 import { REACT_FRAGMENT_TYPE, REACT_TEXT_TYPE } from "./symbols.ts";
 import type { ReactElement } from "./types/element.ts";
-import { FiberFlags, FiberTag, type Fiber } from "./types/fiber.ts";
+import { FiberFlags, FiberTag, type Fiber, type FiberTag as FiberTagType } from "./types/fiber.ts";
+import { isContext } from "./context.ts";
 import { isMemoComponent } from "./memo.ts";
 
 type FiberElementInput = Pick<Fiber, "type" | "key" | "props">;
@@ -27,6 +28,7 @@ export function createFiberFromElement(
 		subtreeFlags: FiberFlags.NO_FLAGS,
 		dirty: true,
 		hasDirtySubtree: false,
+		hasContextUpdate: false,
 	};
 }
 
@@ -53,8 +55,12 @@ export function createWorkInProgressFiber(
 	workInProgress.flags = flags;
 	workInProgress.subtreeFlags = 0;
 	workInProgress.hooks = current.hooks;
+	workInProgress.contextDependencies = canReadContext(workInProgress.tag)
+		? current.contextDependencies
+		: undefined;
 	workInProgress.dirty = current.dirty;
 	workInProgress.hasDirtySubtree = current.hasDirtySubtree;
+	workInProgress.hasContextUpdate = current.hasContextUpdate;
 
 	delete workInProgress.didBailout;
 
@@ -72,6 +78,10 @@ function getFiberTag(element: ReactElement): Fiber["tag"] {
 		return FiberTag.MEMO_COMPONENT;
 	}
 
+	if (isContext(element.type)) {
+		return FiberTag.CONTEXT_PROVIDER;
+	}
+
 	if (element.type === REACT_FRAGMENT_TYPE) {
 		return FiberTag.FRAGMENT;
 	}
@@ -81,4 +91,8 @@ function getFiberTag(element: ReactElement): Fiber["tag"] {
 	}
 
 	return FiberTag.HOST;
+}
+
+function canReadContext(tag: FiberTagType): boolean {
+	return tag === FiberTag.FUNCTION_COMPONENT || tag === FiberTag.MEMO_COMPONENT;
 }
